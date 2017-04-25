@@ -187,7 +187,7 @@
 
             // array || arrayLike
             else if(jQuery.isArrayLike(selector)) {
-                [].push.apply(this, selector);
+                [].push.apply(this,selector);
             }
 
             // function
