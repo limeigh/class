@@ -34,6 +34,54 @@ jQuery.fn.extend({
 
         // 把所有被添加的子元素包装成新实例(记录了上级链)返回
         return this.pushStack(result);
+    },
+    hasClass:function(className){
+        var has=false
+        this.each(function(i,v){
+            if((' '+this.className+' ').indexOf(' '+className+' ')>-1){
+                has =true
+               return false
+            }
+        })
+        return has
+    },
+    addClass:function(className){
+        this.each(function(i,v){
+            var that=this
+            $.each(className.split(' '),function(i,v){
+                if(!$(that).hasClass(v)){
+                    that.className += ' '+className
+                }
+            })
+            that.className=(that.className).trim()
+        })
+        return this
+    },
+    removeClass:function(className){
+        if(arguments.length == 0){
+            this.each(function(){
+                this.className=''
+            })
+        }else{
+            var classArr=className.split(' ')
+            this.each(function(){
+                var that=this
+                $.each(classArr,function(i,v){
+                    that.className=((' '+that.className+' ').replace(' '+v+' ',' ')).trim()
+                })
+            })
+        }
+        return this
+    },
+    toggleClass:function(className){
+        var classArr=className.split(' ')
+        this.each(function(){
+            var $that=$(this)
+            $.each(classArr,function(i,v){
+                $that.hasClass(v)?$that.removeClass(v):$that.addClass(v)
+            })
+        })
+        return this
     }
 });
 
